@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, ElementRef, ViewRef, ViewContainerRef, ComponentFactoryResolver, OnInit, OnChanges, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, Input, Output, ViewChild, ElementRef, ViewRef, ViewContainerRef, ComponentFactoryResolver, OnInit, OnChanges, AfterViewInit, OnDestroy, EventEmitter } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
@@ -76,6 +76,12 @@ export class FateInputComponent implements ControlValueAccessor, OnChanges, OnIn
   @Input()
   public placeholder: string = '';
 
+  @Output()
+  public focus = new EventEmitter<void>();
+
+  @Output()
+  public blur = new EventEmitter<void>();
+
   @ViewChild('dropdown', {
     read: ViewContainerRef,
     static: true,
@@ -131,10 +137,12 @@ export class FateInputComponent implements ControlValueAccessor, OnChanges, OnIn
       // On focus we restore it
       this.restoreSelection();
       this.isFocused = true;
+      this.focus.emit();
     });
     this.editTarget.addEventListener('blur', (event: any) => {
       console.debug('(' + this.uiId + ') blur');
       this.isFocused = false;
+      this.blur.emit();
       this.saveSelection();
 
       if (this.dropdownComponent) {
