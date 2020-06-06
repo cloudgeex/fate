@@ -24,7 +24,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "docs": "ng build --output-path docs",
-    "packagr": "ng-packagr -p ng-package.json",
+    "packagr": "./node_modules/.bin/ng-packagr -p ng-package.json",
     "travis-deploy-once": "travis-deploy-once",
     "semantic-release": "semantic-release"
   },
