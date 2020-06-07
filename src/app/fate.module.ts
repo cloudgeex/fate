@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { FateUiComponent } from './fate-ui/fate-ui.component';
 import { FateInputComponent } from './fate-input/fate-input.component';
@@ -29,34 +30,21 @@ export { FateType } from './fate-type.enum';
     FateInputComponent,
     FateUiComponent,
     FateBootstrapComponent,
-    FateLinkDropdownComponent,
+    FateLinkDropdownComponent
   ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    MatFormFieldModule,
-  ],
+  imports: [CommonModule, FormsModule, MatFormFieldModule, FontAwesomeModule],
   exports: [
     FateUiComponent,
     FateInputComponent,
     FateBootstrapComponent,
     FateLinkDropdownComponent
-  ],
-})
-export class FateModule { }
-
-@NgModule({
-  declarations: [
-    FateMaterialComponent,
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    MatFormFieldModule,
-    FateModule
-  ],
-  exports: [
-    FateMaterialComponent,
   ]
 })
-export class FateMaterialModule { }
+export class FateModule {}
+
+@NgModule({
+  declarations: [FateMaterialComponent],
+  imports: [CommonModule, FormsModule, MatFormFieldModule, FateModule],
+  exports: [FateMaterialComponent]
+})
+export class FateMaterialModule {}

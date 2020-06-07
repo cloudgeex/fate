@@ -17,7 +17,7 @@
     "typescript"
   ],
   "scripts": {
-    "ng": "ng",
+    "ng": "./node_modules/.bin/ng",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
@@ -34,6 +34,7 @@
     "@angular/core": "^9.1.0",
     "@angular/forms": "^9.1.0",
     "core-js": "^2.4.1",
+    "@fortawesome/angular-fontawesome": "^0.6.1",
     "rxjs": "^6.5.3"
   },
   "devDependencies": {
@@ -52,6 +53,9 @@
     "@angular/platform-browser": "^9.1.0",
     "@angular/platform-browser-dynamic": "^9.1.0",
     "@angular/router": "^9.1.0",
+    "@fortawesome/angular-fontawesome": "^0.6.1",
+    "@fortawesome/fontawesome-svg-core": "^1.2.28",
+    "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "@types/jasmine": "~2.5.53",
     "@types/jasminewd2": "^2.0.8",
     "@types/node": "^12.11.1",

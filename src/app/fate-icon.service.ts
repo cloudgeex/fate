@@ -6,26 +6,26 @@ import { FateIcon } from './fate-icon.interface';
   providedIn: 'root'
 })
 export class FateIconService implements FateIcon {
-
+  // font awesome
   protected iconMapping: any = {
-    'bold' : '<i class="fas fa-bold"></i>',
-    'italic' : '<i class="fas fa-italic"></i>',
-    'underline' : '<i class="fas fa-underline"></i>',
-    'strike' : '<i class="fas fa-strikethrough"></i>',
-    'subscript' :  '<i class="fas fa-subscript"></i>',
-    'superscript' : '<i class="fas fa-superscript"></i>',
-    'indent' : '<i class="fas fa-indent"></i>',
-    'outdent' : '<i class="fas fa-outdent"></i>',
-    'ordered' : '<i class="fas fa-list-ol"></i>',
-    'unordered' : '<i class="fas fa-list-ul"></i>',
-    'center' : '<i class="fas fa-align-center"></i>',
-    'justify' : '<i class="fas fa-align-justify"></i>',
-    'left' : '<i class="fas fa-align-left"></i>',
-    'right' : '<i class="fas fa-align-right"></i>',
-    'undo' : '<i class="fas fa-undo-alt"></i>',
-    'redo' : '<i class="fas fa-redo-alt"></i>',
-    'clean' : '<i class="fas fa-eraser"></i>',
-    'link' : '<i class="fas fa-link"></i>',
+    bold: 'bold',
+    italic: 'italic',
+    underline: 'underline',
+    strike: 'strikethrough',
+    subscript: 'subscript',
+    superscript: 'superscript',
+    indent: 'indent',
+    outdent: 'outdent',
+    ordered: 'list-ol',
+    unordered: 'list-ul',
+    center: 'align-center',
+    justify: 'align-justify',
+    left: 'align-left',
+    right: 'align-right',
+    undo: 'undo-alt',
+    redo: 'redo-alt',
+    clean: 'eraser',
+    link: 'link'
   };
 
   public getIcon(actionName): string {
