@@ -14,141 +14,140 @@ export interface FateCommand {
   providedIn: 'root'
 })
 export class FateControllerService {
-
   // List of available commands, alphabetically
   // see https://developer.mozilla.org/en-US/docs/Web/API/Document/execCommand
   protected actionMapping = {
-    'bold' : {
+    bold: {
       command: 'bold',
       name: 'Bold',
       detect: FateType.BOLD
     },
-    'italic' : {
+    italic: {
       command: 'italic',
       name: 'Italic',
       detect: FateType.ITALIC
     },
-    'underline' : {
+    underline: {
       command: 'underline',
       name: 'Underlined',
       detect: FateType.UNDERLINE
     },
-    'strike' : {
+    strike: {
       command: 'strikeThrough',
       name: 'Strike Through',
       detect: FateType.STRIKETHROUGH
     },
-    'subscript' : {
+    subscript: {
       command: 'subscript',
       name: 'Subscript',
       label: 'sub',
       detect: FateType.SUBSCRIPT
     },
-    'superscript' : {
+    superscript: {
       command: 'superscript',
       name: 'Superscript',
       label: 'sup',
       detect: FateType.SUPERSCRIPT
     },
-    'heading1' : {
+    heading1: {
       command: 'formatBlock',
       value: 'H1',
       name: '1st Header',
       label: 'h1',
       detect: FateType.HEADER1
     },
-    'heading2' : {
+    heading2: {
       command: 'formatBlock',
       value: 'H2',
       name: '2nd Header',
       label: 'h2',
       detect: FateType.HEADER2
     },
-    'heading3' : {
+    heading3: {
       command: 'formatBlock',
       value: 'H3',
       name: '3rd Header',
       label: 'h3',
       detect: FateType.HEADER3
     },
-    'heading4' : {
+    heading4: {
       command: 'formatBlock',
       value: 'H4',
       name: '4th Header',
       label: 'h4',
       detect: FateType.HEADER4
     },
-    'heading5' : {
+    heading5: {
       command: 'formatBlock',
       value: 'H5',
       name: '5th Header',
       label: 'h5',
       detect: FateType.HEADER5
     },
-    'heading6' : {
+    heading6: {
       command: 'formatBlock',
       value: 'H6',
       name: '6th Header',
       label: 'h6',
       detect: FateType.HEADER6
     },
-    'normal' : {
+    normal: {
       command: 'formatBlock',
       value: 'DIV',
       name: 'Normal',
-      label: 'p',
+      label: 'p'
     },
-    'indent' : {
+    indent: {
       command: 'indent',
-      name: 'Indent',
+      name: 'Indent'
     },
-    'outdent' : {
+    outdent: {
       command: 'outdent',
-      name: 'Outdent',
+      name: 'Outdent'
     },
-    'ordered' : {
+    ordered: {
       command: 'insertOrderedList',
       name: 'Ordered List',
       detect: FateType.ORDERED_LIST
     },
-    'unordered' : {
+    unordered: {
       command: 'insertUnorderedList',
       name: 'Unorder List',
       detect: FateType.UNORDERED_LIST
     },
-    'center' : {
+    center: {
       command: 'justifyCenter',
       name: 'Center',
       detect: FateType.ALIGN_CENTER
     },
-    'justify' : {
+    justify: {
       command: 'justifyFull',
       name: 'Justify',
       detect: FateType.JUSTIFY
     },
-    'left' : {
+    left: {
       command: 'justifyLeft',
       name: 'Left',
       detect: FateType.ALIGN_LEFT
     },
-    'right' : {
+    right: {
       command: 'justifyRight',
       name: 'Right',
       detect: FateType.ALIGN_RIGHT
     },
-    'undo' : {
+    undo: {
       command: 'undo',
-      name: 'Undo',
+      name: 'Undo'
     },
-    'redo' : {
+    redo: {
       command: 'redo',
-      name: 'Redo',
+      name: 'Redo'
     },
-    'clean' : {
+    clean: {
       command: 'removeFormat',
-      name: 'Remove Formating',
+      name: 'Remove Formating'
     },
-    'link' : {
+    link: {
       command: 'createLink',
       undo: 'unlink',
       name: 'Link',
@@ -170,12 +169,14 @@ export class FateControllerService {
   protected inlineActionMapping: any = {};
   public registerInlineAction(name: string, action: any) {
     if (this.inlineActionMapping[name]) {
-      throw new Error('An inline action with the name "' + name + '" already exists!');
+      throw new Error(
+        'An inline action with the name "' + name + '" already exists!'
+      );
     } else {
       this.inlineActionMapping[name] = action;
     }
   }
-   public getInlineAction(context: string): boolean | any {
+  public getInlineAction(context: string): boolean | any {
     for (const action of Object.keys(this.inlineActionMapping)) {
       const match = this.inlineActionMapping[action].regexp.exec(context);
       if (match) {
@@ -194,7 +195,7 @@ export class FateControllerService {
     default: new Subject<any>()
   };
 
-  constructor() { }
+  constructor() {}
 
   public channel(channelId) {
     if (!this.commandsPipe[channelId]) {
@@ -214,12 +215,18 @@ export class FateControllerService {
     const actions: Array<any> = [];
     for (const node of nodes) {
       for (const action in this.actionMapping) {
-        if (this.actionMapping[action].detect && this.actionMapping[action].detect === node.type) {
-          actions.push({action: action, value: node.value});
-        } else if (this.actionMapping[action].detect && typeof this.actionMapping[action].detect === 'function') {
+        if (
+          this.actionMapping[action].detect &&
+          this.actionMapping[action].detect === node.type
+        ) {
+          actions.push({ action: action, value: node.value });
+        } else if (
+          this.actionMapping[action].detect &&
+          typeof this.actionMapping[action].detect === 'function'
+        ) {
           const detected = this.actionMapping[action].detect(node);
           if (detected) {
-            actions.push({action: action, value: detected.value});
+            actions.push({ action: action, value: detected.value });
           }
         }
       }
@@ -227,19 +234,30 @@ export class FateControllerService {
     this.enabledActions[channelId].next(actions);
   }
 
-
   public do(channel, action, value?) {
     if (this.actionMapping[action].dropdown && !value) {
       if (this.actionMapping[action].undo) {
-        this.commandsPipe[channel].next({name: this.actionMapping[action].undo, value: this.actionMapping[action].value || value});
+        this.commandsPipe[channel].next({
+          name: this.actionMapping[action].undo,
+          value: this.actionMapping[action].value || value
+        });
       } else {
         throw new Error('Action "' + action + '"doesn\'t have a undo command');
       }
     } else {
-      if (this.actionMapping[action].value && (typeof this.actionMapping[action].value === 'function')) {
-        this.commandsPipe[channel].next({name: this.actionMapping[action].command, value: this.actionMapping[action].value(value)});
+      if (
+        this.actionMapping[action].value &&
+        typeof this.actionMapping[action].value === 'function'
+      ) {
+        this.commandsPipe[channel].next({
+          name: this.actionMapping[action].command,
+          value: this.actionMapping[action].value(value)
+        });
       } else {
-        this.commandsPipe[channel].next({name: this.actionMapping[action].command, value: this.actionMapping[action].value || value});
+        this.commandsPipe[channel].next({
+          name: this.actionMapping[action].command,
+          value: this.actionMapping[action].value || value
+        });
       }
     }
   }
@@ -247,15 +265,24 @@ export class FateControllerService {
   public doInline(channel, action, value?) {
     if (action.dropdown && !value) {
       if (action.undo) {
-        this.commandsPipe[channel].next({name: action.undo, value: action.value || value});
+        this.commandsPipe[channel].next({
+          name: action.undo,
+          value: action.value || value
+        });
       } else {
         throw new Error('Action "' + action + '"doesn\'t have a undo command');
       }
     } else {
-      if (action.value && (typeof action.value === 'function')) {
-        this.commandsPipe[channel].next({name: action.command, value: action.value(value)});
+      if (action.value && typeof action.value === 'function') {
+        this.commandsPipe[channel].next({
+          name: action.command,
+          value: action.value(value)
+        });
       } else {
-        this.commandsPipe[channel].next({name: action.command, value: action.value || value});
+        this.commandsPipe[channel].next({
+          name: action.command,
+          value: action.value || value
+        });
       }
     }
   }
