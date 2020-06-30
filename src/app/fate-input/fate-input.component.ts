@@ -105,10 +105,10 @@ export class FateInputComponent
   public initialFocus: boolean = false;
 
   @Output()
-  public focus = new EventEmitter<void>();
+  public focused = new EventEmitter<void>();
 
   @Output()
-  public blur = new EventEmitter<void>();
+  public blured = new EventEmitter<void>();
 
   public dropdownPostionTop: string;
   public dropdownPostionLeft: string;
@@ -146,7 +146,7 @@ export class FateInputComponent
     protected sanitizer: DomSanitizer,
     protected factoryResolver: ComponentFactoryResolver,
     private renderer: Renderer2,
-    @Inject(DOCUMENT) private document: Document
+    @Inject(DOCUMENT) private document: any
   ) {}
 
   private unlisten() {
@@ -202,7 +202,7 @@ export class FateInputComponent
         // On focus we restore it
         this.restoreSelection();
         this.isFocused = true;
-        this.focus.emit();
+        this.focused.emit();
       }
     );
     this.unlisteners = this.renderer.listen(
@@ -211,7 +211,7 @@ export class FateInputComponent
       (event: FocusEvent) => {
         console.debug('(' + this.uiId + ') blur');
         this.isFocused = false;
-        this.blur.emit();
+        this.blured.emit();
         this.saveSelection();
 
         if (this.dropdownComponent) {
@@ -337,8 +337,16 @@ export class FateInputComponent
     this.renderer.setStyle(this.editTarget, 'min-height', this.getHeight(2));
 
     if (this.initialFocus) {
-      this.editTarget.focus();
+      this.focus();
     }
+  }
+
+  public focus() {
+    Promise.resolve(null).then(() => this.editTarget.focus());
+  }
+
+  public blur() {
+    Promise.resolve(null).then(() => this.editTarget.blur());
   }
 
   public ngOnChanges(changes: SimpleChanges) {
