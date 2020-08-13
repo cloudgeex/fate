@@ -41,7 +41,9 @@ import {
   faUndoAlt,
   faRedoAlt,
   faEraser,
-  faLink
+  faLink,
+  faParagraph,
+  faHeading
 } from '@fortawesome/free-solid-svg-icons';
 
 // Add an icon to the library for convenient access in other components
@@ -63,7 +65,9 @@ export const icons: IconDefinition[] = [
   faUndoAlt,
   faRedoAlt,
   faEraser,
-  faLink
+  faLink,
+  faParagraph,
+  faHeading
 ];
 
 @NgModule({

@@ -1,15 +1,82 @@
-<div>
-  <ng-container *ngFor="let button of buttons">
-    <a *ngIf="button !== 'separator'" tabindex="0" class="fate-ui-button" [name]="button" [ngClass]="{enabled: enabled[button], 'with-dropdown': dropdownAction === button}" (click)="do($event, button)">
-      <span *ngIf="icon.getIcon(button) as iconName" >
+<ng-template #buttonTpl let-button>
+  <span *ngIf="icon.getIcon(button) as iconName">
+    <fa-icon [icon]="['fas', iconName]"></fa-icon>
+  </span>
+  <span *ngIf="!icon.getIcon(button)">{{
+    controller.getAction(button).label
+  }}</span>
+  <span class="reader">{{ controller.getAction(button).name }}</span>
+</ng-template>
+<ng-template #buttonMenuTpl let-group="group">
+  <span mat-icon-button class="fate-ui-button" [matMenuTriggerFor]="menu">
+    <ng-container
+      *ngIf="!isAnyButtonEnabled(group.buttons); else enabledButton"
+    >
+      <span *ngIf="group.icon as iconName">
         <fa-icon [icon]="['fas', iconName]"></fa-icon>
       </span>
-      <span *ngIf="!icon.getIcon(button)">{{controller.getAction(button).label}}</span>
-      <span class="reader">{{controller.getAction(button).name}}</span>
-    </a>
-    <div *ngIf="button === 'separator'" class="fate-ui-separator"></div>
+      <span *ngIf="!group.icon">{{ group.label }}</span>
+      <span class="reader">{{ group.name }}</span>
+    </ng-container>
+    <ng-template #enabledButton>
+      <ng-container *ngFor="let button of group.buttons">
+        <span *ngIf="enabled[button]" [ngClass]="group.name">
+          <ng-container
+            *ngTemplateOutlet="buttonTpl; context: { $implicit: button }"
+          >
+          </ng-container>
+        </span>
+      </ng-container>
+    </ng-template>
+  </span>
+
+  <mat-menu #menu="matMenu" class="buttons-menu">
+    <ng-container *ngFor="let button of group.buttons">
+      <button
+        mat-menu-item
+        [class.enabled]="enabled[button]"
+        (click)="do($event, button)"
+      >
+        <ng-container
+          *ngTemplateOutlet="buttonTpl; context: { $implicit: button }"
+        >
+        </ng-container>
+      </button>
+    </ng-container>
+  </mat-menu>
+</ng-template>
+<div>
+  <ng-container *ngFor="let button of buttons">
+    <ng-container *ngIf="!isButtonExcluded(button)">
+      <ng-container *ngIf="isButtonGroup(button)">
+        <ng-container
+          *ngTemplateOutlet="buttonMenuTpl; context: { group: button }"
+        >
+        </ng-container>
+      </ng-container>
+
+      <ng-container *ngIf="!isButtonGroup(button) && button !== 'separator'">
+        <a
+          tabindex="0"
+          class="fate-ui-button"
+          [name]="button"
+          [ngClass]="{
+            enabled: enabled[button],
+            'with-dropdown': dropdownAction === button
+          }"
+          (click)="do($event, button)"
+        >
+          <ng-container
+            *ngTemplateOutlet="buttonTpl; context: { $implicit: button }"
+          >
+          </ng-container>
+        </a>
+      </ng-container>
+
+      <div *ngIf="button === 'separator'" class="fate-ui-separator"></div>
+    </ng-container>
+    <div class="fate-ui-dropdown" [ngClass]="{ visible: dropdownAction }">
+      <ng-template #dropdown></ng-template>
+    </div>
   </ng-container>
-  <div class="fate-ui-dropdown" [ngClass]="{visible: dropdownAction}">
-    <ng-template #dropdown></ng-template>
-  </div>
 </div>

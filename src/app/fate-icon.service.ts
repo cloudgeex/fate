@@ -12,6 +12,7 @@ export class FateIconService implements FateIcon {
     italic: 'italic',
     underline: 'underline',
     strike: 'strikethrough',
+    normal: 'paragraph',
     subscript: 'subscript',
     superscript: 'superscript',
     indent: 'indent',

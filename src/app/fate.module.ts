@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { FateUiComponent } from './fate-ui/fate-ui.component';
 import { FateInputComponent } from './fate-input/fate-input.component';
@@ -32,7 +33,13 @@ export { FateType } from './fate-type.enum';
     FateBootstrapComponent,
     FateLinkDropdownComponent
   ],
-  imports: [CommonModule, FormsModule, MatFormFieldModule, FontAwesomeModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatFormFieldModule,
+    FontAwesomeModule,
+    MatMenuModule
+  ],
   exports: [
     FateUiComponent,
     FateInputComponent,

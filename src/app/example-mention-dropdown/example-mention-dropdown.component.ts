@@ -8,11 +8,10 @@ import { FateDropdown } from '../fate.module';
   styleUrls: ['./example-mention-dropdown.component.scss']
 })
 export class ExampleMentionDropdownComponent implements FateDropdown {
-
   private _value: string;
   @Input()
   public set value(value) {
-    this._value = value;
+    this._value = value || '';
     this.filterList();
   }
   public get value() {
@@ -27,25 +26,33 @@ export class ExampleMentionDropdownComponent implements FateDropdown {
       name: 'Fate',
       description: 'Flexible Angular Text Editor',
       url: 'https://github.com/onaluf/fate'
-    }, {
+    },
+    {
       name: 'ngLipsum',
-      description: 'Simple Lorem Ipsum based dummy content generator directive and services for Angular',
+      description:
+        'Simple Lorem Ipsum based dummy content generator directive and services for Angular',
       url: 'https://github.com/onaluf/ngLipsum'
-    }, {
+    },
+    {
       name: 'RacerJS',
-      description: 'A simple racing game inspired by the classic Lotus series on Amiga. This has been made for the 10k Apart contest (http://10k.aneventapart.com).',
+      description:
+        'A simple racing game inspired by the classic Lotus series on Amiga. This has been made for the 10k Apart contest (http://10k.aneventapart.com).',
       url: 'https://github.com/onaluf/RacerJS'
-    }, {
+    },
+    {
       name: 'voxel',
       description: 'a voxel spacing demo done in javascript',
       url: 'https://github.com/onaluf/voxel'
-    }, {
+    },
+    {
       name: 'gameQuery',
       description: 'a javascript game engine with jQuery',
       url: 'https://github.com/onaluf/gameQuery'
-    }, {
+    },
+    {
       name: 'jQueryGameDevEssentials',
-      description: 'This is the source code for the example of the book "jQuery Game Development Essentials" (http://jquerygamedevelopment.com/)',
+      description:
+        'This is the source code for the example of the book "jQuery Game Development Essentials" (http://jquerygamedevelopment.com/)',
       url: 'https://github.com/onaluf/jQueryGameDevEssentials'
     }
   ];
@@ -65,24 +72,32 @@ export class ExampleMentionDropdownComponent implements FateDropdown {
     }
   }
 
-  public changeValue (value) {
+  public changeValue(value) {
     this._value = value;
-    this.valueChange.emit('<span class="repos custom-block" tabindex="0" contenteditable="false" data-href="' + value.url + '" title="' + value.description + '"><i class="fab fa-github"></i> ' + value.name + '</span>&nbsp;');
+    this.valueChange.emit(
+      '<span class="repos custom-block" tabindex="0" contenteditable="false" data-href="' +
+        value.url +
+        '" title="' +
+        value.description +
+        '"><i class="fab fa-github"></i> ' +
+        value.name +
+        '</span>&nbsp;'
+    );
   }
 
-  public selectNext () {
+  public selectNext() {
     this.selected++;
     if (this.selected >= this.filteredList.length) {
       this.selected = this.filteredList.length - 1;
     }
-  };
-  public selecPrevious () {
+  }
+  public selecPrevious() {
     this.selected--;
     if (this.selected < 0) {
       this.selected = 0;
     }
-  };
-  public confirmSelection () {
+  }
+  public confirmSelection() {
     this.changeValue(this.filteredList[this.selected]);
-  };
+  }
 }

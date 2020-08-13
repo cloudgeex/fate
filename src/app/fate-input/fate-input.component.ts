@@ -424,6 +424,7 @@ export class FateInputComponent
         this.checkEmpty();
         this.reactToChanges();
       } else {
+        // TODO replace execCommand, its obsolete
         this.document.execCommand(command.name, false, command.value);
       }
       this.saveSelection();

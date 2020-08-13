@@ -53,42 +53,42 @@ export class FateControllerService {
       command: 'formatBlock',
       value: 'H1',
       name: '1st Header',
-      label: 'h1',
+      label: 'H1',
       detect: FateType.HEADER1
     },
     heading2: {
       command: 'formatBlock',
       value: 'H2',
       name: '2nd Header',
-      label: 'h2',
+      label: 'H2',
       detect: FateType.HEADER2
     },
     heading3: {
       command: 'formatBlock',
       value: 'H3',
       name: '3rd Header',
-      label: 'h3',
+      label: 'H3',
       detect: FateType.HEADER3
     },
     heading4: {
       command: 'formatBlock',
       value: 'H4',
       name: '4th Header',
-      label: 'h4',
+      label: 'H4',
       detect: FateType.HEADER4
     },
     heading5: {
       command: 'formatBlock',
       value: 'H5',
       name: '5th Header',
-      label: 'h5',
+      label: 'H5',
       detect: FateType.HEADER5
     },
     heading6: {
       command: 'formatBlock',
       value: 'H6',
       name: '6th Header',
-      label: 'h6',
+      label: 'H6',
       detect: FateType.HEADER6
     },
     normal: {

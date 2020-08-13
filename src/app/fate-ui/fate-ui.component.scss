@@ -73,3 +73,22 @@ $font-size: 14px;
     pointer-events: all;
   }
 }
+::ng-deep .buttons-menu button.mat-menu-item {
+  line-height: 26px !important;
+  height: 26px !important;
+  padding: 0 10px !important;
+  outline: none;
+  &.enabled {
+    background-color: #E5E5E5;
+  }
+
+  span.reader {
+    display: none;
+  }
+}
+::ng-deep .buttons-menu {
+  min-width: auto !important;
+}
+.headers {
+  font-weight: bold;
+}
